@@ -19,9 +19,24 @@ textarea:focus {
   @apply border-blue-900;
 }
 
+.btn-default,
+.btn-primary,
+.btn-red,
+table.basic a {
+  @apply inline-flex gap-1 px-4 py-1 mr-1 rounded-md;
+}
+
+.btn-default {
+  @apply bg-gray-500 text-white;
+}
+
 .btn-primary,
 table.basic a {
-  @apply bg-blue-900 text-white inline-flex gap-1 px-4 py-1 rounded-md;
+  @apply bg-blue-900 text-white;
+}
+
+.btn-red {
+  @apply bg-red-800 text-white;
 }
 
 table.basic {

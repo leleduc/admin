@@ -4,24 +4,27 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const ProductForm = ({
+  _id: productId,
   name: productName,
-  description: productDesc,
+  desc: productDesc,
   price: productPrice,
 }) => {
+  // const id = productId;
+  const [id, setId] = useState(productId || '');
   const [name, setName] = useState(productName || '');
-  const [description, setDescription] = useState(
-    productDesc ? productDesc : ''
+  const [desc, setDesc] = useState(
+    productDesc || ''
   );
-  const [price, setPrice] = useState(productPrice ? productPrice : '');
+  const [price, setPrice] = useState(productPrice || '');
 
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
 
-  console.log(name);
+  // console.log(productId);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const data = { name, description, price };
+    const data = {name, desc, price};
 
     if (id) {
       //update
@@ -55,8 +58,8 @@ const ProductForm = ({
       <textarea
         name=""
         id=""
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        value={desc}
+        onChange={(e) => setDesc(e.target.value)}
         placeholder="Description"
       ></textarea>
       <label htmlFor="">Price (USD)</label>

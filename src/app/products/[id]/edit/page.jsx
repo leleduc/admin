@@ -1,8 +1,7 @@
-'use client';
-import ProductForm from '@/components/productForm/productForm';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+"use client";
+import ProductForm from "@/components/productForm/productForm";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const ProductEdit = ({ params }) => {
   const [productData, setproductData] = useState(null);

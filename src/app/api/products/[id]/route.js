@@ -17,20 +17,23 @@ export const GET = async (request, { params }) => {
   }
 };
 
-export const UPDATE = async (request, { params }) => {
+export const PUT = async (request, { params }) => {
   const { id } = params;
+  // const {name,desc,price} = await request.json();
+  const data = await request.json();
+  const { name, desc, price } = data;
   if (!request.body) {
     return res.status(400).send({ message: 'Data to update is empty' });
   }
 
   try {
-    await connect();
 
-    await product.findByIdAndUpdate(id, request.body, {
+    await connect();
+    await product.findByIdAndUpdate(id, data, {
       useFindAndModify: false,
     });
 
-    return new NextResponse('Product has been deleted', { status: 200 });
+    return new NextResponse(`Product has been updated ${id}`, { status: 200 });
   } catch (err) {
     return new NextResponse('Database Error', { status: 500 });
   }
@@ -44,8 +47,8 @@ export const DELETE = async (request, { params }) => {
 
     await product.findByIdAndDelete(id);
 
-    return new NextResponse('Product has been deleted', { status: 200 });
+    return new NextResponse(`Product has been deleted ${id}`, { status: 200 });
   } catch (err) {
-    return new NextResponse('Database Error', { status: 500 });
+    return new NextResponse(`Database Error ${id}`, { status: 500 });
   }
 };
