@@ -47,8 +47,13 @@ table.basic thead tr td {
   @apply bg-blue-100;
 }
 
-table.basic tr td {
+table.basic tr td,
+select {
   @apply border border-gray-200 p-1;
+}
+
+select {
+  @apply ml-1 h-8;
 }
 
 /* table.basic a {

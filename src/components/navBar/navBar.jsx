@@ -1,18 +1,18 @@
-'use client';
-import Link from 'next/link';
+"use client";
+import Link from "next/link";
 
-import { usePathname } from 'next/navigation';
-import React from 'react';
+import { usePathname } from "next/navigation";
+import React from "react";
 
 const NavBar = () => {
-  const inactiveLink = 'flex gap-1';
-  const activeLink = inactiveLink + ' bg-white text-blue-900 rounded-l-lg';
+  const inactiveLink = "flex gap-1";
+  const activeLink = inactiveLink + " bg-white text-blue-900 rounded-l-lg";
 
   const pathname = usePathname();
   // console.log({ pathname });
   return (
     <aside className="text-white p-4 pr-0">
-      <Link className="flex gap-1 mb-4 mr-2" href={'/'}>
+      <Link className="flex gap-1 mb-4 mr-2" href={"/"}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -32,8 +32,8 @@ const NavBar = () => {
 
       <nav className="flex flex-col gap-2">
         <Link
-          className={pathname === '/' ? activeLink : inactiveLink}
-          href={'/'}
+          className={pathname === "/" ? activeLink : inactiveLink}
+          href={"/"}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,8 +52,28 @@ const NavBar = () => {
           Dashboard
         </Link>
         <Link
-          className={pathname.includes('/products') ? activeLink : inactiveLink}
-          href={'/products'}
+          className={pathname.includes("/posts") ? activeLink : inactiveLink}
+          href={"/posts"}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+            />
+          </svg>
+          Posts
+        </Link>
+        <Link
+          className={pathname.includes("/products") ? activeLink : inactiveLink}
+          href={"/products"}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -72,8 +92,8 @@ const NavBar = () => {
           Products
         </Link>
         <Link
-          className={pathname.includes('/orders') ? activeLink : inactiveLink}
-          href={'/orders'}
+          className={pathname.includes("/orders") ? activeLink : inactiveLink}
+          href={"/orders"}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,8 +112,28 @@ const NavBar = () => {
           Orders
         </Link>
         <Link
-          className={pathname.includes('/settings') ? activeLink : inactiveLink}
-          href={'/settings'}
+          className={pathname.includes("/media") ? activeLink : inactiveLink}
+          href={"/media"}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+            />
+          </svg>
+          Media
+        </Link>
+        <Link
+          className={pathname.includes("/settings") ? activeLink : inactiveLink}
+          href={"/settings"}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
