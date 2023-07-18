@@ -1,36 +1,20 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-
-// import Modal from "react-modal";
-// import category from "@/models/category";
-
-// const customStyles = {
-//   content: {
-//     top: "50%",
-//     left: "50%",
-//     right: "auto",
-//     bottom: "auto",
-//     marginRight: "-50%",
-//     transform: "translate(-50%, -50%)",
-//   },
-// };
+'use client';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Categories = () => {
-  let subtitle;
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [categories, setCategories] = useState([]);
-  const [parentCategory, setParentCategory] = useState("");
+  const [parentCategory, setParentCategory] = useState('');
   const [editedCategory, setEditedCategory] = useState(null);
-  const [selectCategory, setSelectCategory] = useState("");
-
-  const [modal, setModal] = useState(false);
+  const [selectCategory, setSelectCategory] = useState('');
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
     fetchCategories();
   }, []);
   function fetchCategories() {
-    axios.get("/api/categories").then((result) => {
+    axios.get('/api/categories').then((result) => {
       setCategories(result.data);
     });
   }
@@ -43,11 +27,9 @@ const Categories = () => {
 
   async function deleteCategory(category) {
     console.log(category._id);
-    await axios
-      .delete("/api/categories?id=" + category._id)
-      .then((response) => {
-        fetchCategories();
-      });
+    await axios.delete('/api/categories/' + category._id).then((response) => {
+      fetchCategories();
+    });
 
     setSelectCategory(null);
   }
@@ -62,14 +44,14 @@ const Categories = () => {
 
     if (editedCategory) {
       data._id = editedCategory._id;
-      await axios.put("/api/categories", data);
+      await axios.put('/api/categories', data);
       setEditedCategory(null);
-      setParentCategory("");
+      setParentCategory('');
     } else {
-      await axios.post("/api/categories", data);
+      await axios.post('/api/categories', data);
     }
 
-    setName("");
+    setName('');
     fetchCategories();
   }
 
@@ -80,13 +62,13 @@ const Categories = () => {
       <label>
         {editedCategory
           ? `Edit category ${editedCategory.name}`
-          : "Create new category"}
+          : 'Create new category'}
       </label>
       <form onSubmit={handleSubmit}>
         <div className="flex gap-1">
           <input
             type="text"
-            placeholder={"Category name"}
+            placeholder={'Category name'}
             onChange={(ev) => setName(ev.target.value)}
             value={name}
           />
@@ -103,11 +85,50 @@ const Categories = () => {
                 </option>
               ))}
           </select>
-
-          <button type="submit" className="btn-primary py-1">
-            Save
-          </button>
         </div>
+        <div className="mb-2">
+          <label className="block">Properties</label>
+          <button
+            onClick={addProperty}
+            type="button"
+            className="btn-default text-sm mb-2"
+          >
+            Add new property
+          </button>
+          {properties.length > 0 &&
+            properties.map((property, index) => (
+              <div key={property.name} className="flex gap-1 mb-2">
+                <input
+                  type="text"
+                  value={property.name}
+                  className="mb-0"
+                  onChange={(ev) =>
+                    handlePropertyNameChange(index, property, ev.target.value)
+                  }
+                  placeholder="property name (example: color)"
+                />
+                <input
+                  type="text"
+                  className="mb-0"
+                  onChange={(ev) =>
+                    handlePropertyValuesChange(index, property, ev.target.value)
+                  }
+                  value={property.values}
+                  placeholder="values, comma separated"
+                />
+                <button
+                  onClick={() => removeProperty(index)}
+                  type="button"
+                  className="btn-red"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+        </div>
+        <button type="submit" className="btn-primary py-1">
+          Save
+        </button>
       </form>
 
       <table className="basic mt-4">
